@@ -1,1 +1,30 @@
-date,membre,question,configuration,resultat,decision
+2026-10-04T00:25:33.484371+00:00,1,Q1 MLP reference,11 descripteurs; Adam 1e-3; 60 epoques; batch=64; class_weight,entrainement termine,Analyser validation
+2026-10-04T00:25:52.378989+00:00,1,Q1 MLP reference - validation,11 descripteurs; CE ponderee; 60 epoques; batch=64,"acc=0.720; F1 macro=0.680; rappels=[0.627, 1.0, 0.721, 0.778, 0.88]",Q1 : metriques du modele de reference
+2026-10-04T00:27:38.255911+00:00,1,Q1 echecs QRS,seuils n_qrs < 8 ou > 25 ou ecart fc > 30%,9 fenetres en echec,Analyser signaux et impact MLP
+2026-10-04T18:29:09.108725+00:00,1,Q1 MLP reference,11 descripteurs; Adam 1e-3; 60 epoques; batch=64; class_weight,entrainement termine,Analyser validation
+2026-10-04T18:29:12.102470+00:00,1,Q1 MLP reference - validation,11 descripteurs; CE ponderee; 60 epoques; batch=64,"acc=0.720; F1 macro=0.680; rappels=[0.627, 1.0, 0.721, 0.778, 0.88]",Q1 : metriques du modele de reference
+2026-10-04T18:29:12.214349+00:00,1,Q1 echecs QRS,seuils n_qrs < 8 ou > 25 ou ecart fc > 30%,9 fenetres en echec,Analyser signaux et impact MLP
+2026-10-04T18:29:31.502832+00:00,M2,Q2,Entropie Croisée Simple,F1_macro=0.7367,Focal loss retenue
+2026-10-04T18:29:52.554819+00:00,M2,Q2,Entropie Croisée Pondérée,F1_macro=0.6803,Focal loss retenue
+2026-10-04T18:30:18.047822+00:00,M2,Q2,Perte Focale (gamma=2.0),F1_macro=0.6992,Focal loss retenue
+2026-10-04T18:30:46.746091+00:00,M2,Q3,Base (11),F1_macro=0.6992,Apport spectral validé
+2026-10-04T18:31:00.319979+00:00,M2,Q3,Base + Morph (14),F1_macro=0.6386,Apport spectral validé
+2026-10-04T18:31:26.088546+00:00,M2,Q3,Base + Freq (16),F1_macro=0.7323,Apport spectral validé
+2026-10-04T18:31:46.591702+00:00,M2,Q3,Base + Irreg (16),F1_macro=0.7054,Apport spectral validé
+2026-10-04T18:32:10.473115+00:00,M2,Q3,Tous Descripteurs (24),F1_macro=0.6272,Apport spectral validé
+2026-10-04T18:32:38.159766+00:00,M3,Q4 Seuil FA,Spec cible=95%; s_FA=0.7026,Sens_val=0.8333; AUC=0.9699,Seuil calibre sur validation
+2026-10-04T18:32:38.481735+00:00,M3,7.2 Verif theorique,L=-ln(p1); grad=p-y,"Loss=1.2040; grad=[0.5, -0.699999988079071, 0.10000000149011612, 0.05000000074505806, 0.05000000074505806]",Controles theoriques valides
+2026-10-04T18:35:27.047751+00:00,1,Q1 MLP reference,11 descripteurs; Adam 1e-3; 60 epoques; batch=64; class_weight,entrainement termine,Analyser validation
+2026-10-04T18:35:29.916336+00:00,1,Q1 MLP reference - validation,11 descripteurs; CE ponderee; 60 epoques; batch=64,"acc=0.720; F1 macro=0.680; rappels=[0.627, 1.0, 0.721, 0.778, 0.88]",Q1 : metriques du modele de reference
+2026-10-04T18:35:30.027450+00:00,1,Q1 echecs QRS,seuils n_qrs < 8 ou > 25 ou ecart fc > 30%,9 fenetres en echec,Analyser signaux et impact MLP
+2026-10-04T18:36:01.882156+00:00,M2,Q2,Entropie Croisée Simple,F1_macro=0.7367,Focal loss retenue
+2026-10-04T18:36:21.284179+00:00,M2,Q2,Entropie Croisée Pondérée,F1_macro=0.6803,Focal loss retenue
+2026-10-04T18:36:50.558089+00:00,M2,Q2,Perte Focale (gamma=2.0),F1_macro=0.6992,Focal loss retenue
+2026-10-04T18:37:21.327947+00:00,M2,Q3,Base (11),F1_macro=0.6992,Apport spectral validé
+2026-10-04T18:37:39.651590+00:00,M2,Q3,Base + Morph (14),F1_macro=0.6386,Apport spectral validé
+2026-10-04T18:38:03.389920+00:00,M2,Q3,Base + Freq (16),F1_macro=0.7323,Apport spectral validé
+2026-10-04T18:38:36.156408+00:00,M2,Q3,Base + Irreg (16),F1_macro=0.7054,Apport spectral validé
+2026-10-04T18:39:05.200328+00:00,M2,Q3,Tous Descripteurs (24),F1_macro=0.6272,Apport spectral validé
+2026-10-04T18:39:36.657529+00:00,M3,Q4 Seuil FA,Spec cible=95%; s_FA=0.7026,Sens_val=0.8333; AUC=0.9699,Seuil calibre sur validation
+2026-10-04T18:39:36.984089+00:00,M3,7.2 Verif theorique,L=-ln(p1); grad=p-y,"Loss=1.2040; grad=[0.5, -0.699999988079071, 0.10000000149011612, 0.05000000074505806, 0.05000000074505806]",Controles theoriques valides
+2026-10-04T18:39:54.174776+00:00,M3,9. Evaluation Test,24 descripteurs + Focal Loss,F1_macro=0.7395; Acc=0.7952; Sinus_non_alerte=0.9948,Evaluation finale Jalon 1 achevee
