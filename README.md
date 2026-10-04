@@ -3,6 +3,34 @@
 Projet de télésurveillance cardiaque du module d'IA Avancée (M2 SDIA, Année 2026–2027).  
 L'objectif est d'analyser des fenêtres ECG de 10 secondes pour classifier automatiquement cinq rythmes cardiaques et concevoir un système d'alerte clinique pour la télésurveillance ambulatoire (patch connecté).
 
+## Informations académiques
+
+| Élément | Information |
+| :--- | :--- |
+| **Classe** | M2 SDIA - Advanced Artificial Intelligence |
+| **Unité / projet** | UC3 - Cardiac Telemonitoring (CardioPatch) |
+| **Professeur** | Soufiane HAMIDA |
+| **Membre 1** | HICHAM OUAOUCHE |
+| **Membre 2** | loubnamahrach |
+| **Membre 3** | boulfalahkhadija |
+
+## Résumé exécutif
+
+Ce projet étudie la possibilité d'utiliser un patch ECG connecté pour aider à
+la surveillance ambulatoire des patients. Chaque fenêtre ECG est transformée en
+descripteurs numériques, puis classée parmi cinq rythmes cardiaques : rythme
+sinusal, fibrillation atriale, extrasystoles ventriculaires, tachycardie
+sinusale et bloc auriculo-ventriculaire du deuxième degré.
+
+Le travail suit une démarche expérimentale contrôlée : séparation des patients
+entre les ensembles, détection des QRS, extraction de descripteurs, comparaison
+de fonctions de perte, enrichissement des variables, calibration d'un seuil
+d'alerte FA et évaluation finale sur un test indépendant. Le meilleur compromis
+observé au cours de ce jalon atteint un F1 macro de 0,740 sur le test et préserve
+99,5 % des fenêtres sinusales de fausses alertes. La sensibilité FA reste
+insuffisante pour un usage clinique autonome, ce qui constitue le principal axe
+d'amélioration.
+
 ---
 
 ## 1. Objectifs du Jalon 1
@@ -23,9 +51,9 @@ Le travail du Jalon 1 est réparti entre les 3 membres de l'équipe :
 
 | Membre | Responsabilités & Questions | Statut |
 | :--- | :--- | :---: |
-| **Membre 1** | Environnement, chargement des données, contrôles anti-fuite, détection QRS, 11 descripteurs de base, modèle MLP de référence (Q1), analyse des échecs QRS, vérification théorique 1 (poids de classe). | **Terminé & Validé** |
-| **Membre 2** | Comparaison des fonctions de perte Q2 (CE simple, CE pondérée, Focal Loss $\gamma=2.0$), enrichissement à 24 descripteurs avancés (morphologie, Welch, Poincaré) et étude d'ablation Q3. | **Terminé & Validé** |
-| **Membre 3** | Calibration du seuil d'alerte clinique FA Q4 (spécificité 95 %, courbe ROC / AUC), vérification théorique 2 (gradient de l'entropie croisée par rapport aux logits), tenue du journal d'expériences, évaluation finale sur le Test et rédaction de la note de décision clinique. | **Terminé & Validé** |
+| **HICHAM OUAOUCHE** | Environnement, chargement des données, contrôles anti-fuite, détection QRS, 11 descripteurs de base, modèle MLP de référence (Q1), analyse des échecs QRS, vérification théorique 1 (poids de classe). | **Terminé & Validé** |
+| **loubnamahrach** | Comparaison des fonctions de perte Q2 (CE simple, CE pondérée, Focal Loss $\gamma=2.0$), enrichissement à 24 descripteurs avancés (morphologie, Welch, Poincaré) et étude d'ablation Q3. | **Terminé & Validé** |
+| **boulfalahkhadija** | Calibration du seuil d'alerte clinique FA Q4 (spécificité 95 %, courbe ROC / AUC), vérification théorique 2 (gradient de l'entropie croisée par rapport aux logits), tenue du journal d'expériences, évaluation finale sur le Test et rédaction de la note de décision clinique. | **Terminé & Validé** |
 
 ---
 
@@ -142,3 +170,63 @@ from src.commun import charger, extraire_avances, evaluer_rythme
 train = charger("data", "train")
 descripteurs_24 = extraire_avances(train["X"], age=train["age"], sexe=train["sexe"])
 ```
+
+---
+
+## 9. Analyse critique
+
+### 9.1 Points forts
+
+- **Absence de fuite patient** : les identifiants patient sont contrôlés avant
+   l'entraînement. Une même personne ne doit pas apparaître dans plusieurs
+   ensembles, afin d'éviter une estimation artificiellement optimiste.
+- **Séparation des rôles des ensembles** : le train sert à apprendre les
+   paramètres, la validation sert à comparer les configurations et à calibrer
+   l'alerte, tandis que le test est conservé pour l'évaluation finale.
+- **Prise en compte du déséquilibre** : les poids de classe et la Focal Loss
+   empêchent les classes minoritaires d'être complètement masquées par
+   l'accuracy globale.
+- **Traçabilité** : les paramètres des expériences et les décisions sont
+   conservés dans les journaux CSV et dans `docs/page_decisions.md`.
+
+### 9.2 Limites expérimentales
+
+Les résultats doivent être interprétés avec prudence. Le nombre d'exemples de
+FA dans la validation est faible, et une variation de quelques fenêtres peut
+modifier fortement le rappel. Le détecteur QRS est heuristique : le bruit, la
+dérive de la ligne de base et les morphologies anormales peuvent modifier le
+nombre de pics détectés. Enfin, les descripteurs agrégés résument le signal et
+ne représentent pas toute la morphologie temporelle de l'ECG.
+
+La sensibilité FA obtenue sur le test (`0,333` au seuil calibré) est inférieure
+à l'objectif de `0,95`. Le seuil retenu répond au compromis de spécificité, mais
+ne suffit donc pas à garantir la détection clinique de toutes les fibrillations
+atriales. Cette limite doit être explicitement conservée dans toute
+interprétation du projet.
+
+### 9.3 Perspectives
+
+Les développements suivants sont recommandés :
+
+1. comparer le MLP à un CNN 1D utilisant directement les séquences ECG ;
+2. améliorer la qualité du signal et la robustesse de la détection QRS ;
+3. augmenter le nombre de patients et valider sur une cohorte externe ;
+4. calibrer les probabilités et analyser la stabilité du seuil par patient ;
+5. évaluer séparément sensibilité, spécificité, précision, F1 et courbes
+    precision-rappel avant toute interprétation clinique.
+
+## 10. Conclusion
+
+Le Jalon 1 met en place une chaîne complète allant du signal ECG à une
+proposition d'alerte FA. La démarche montre qu'un MLP associé à des
+descripteurs physiologiques peut distinguer plusieurs rythmes et limiter les
+fausses alertes sinusales. Cependant, la détection des FA manquées reste le
+problème prioritaire. Le système présenté est donc un prototype académique
+reproductible et un point de départ pour les modèles temporels plus riches ;
+il ne doit pas être utilisé comme dispositif médical ou comme décision clinique
+autonome.
+
+Les résultats détaillés, les choix de seuil et les vérifications théoriques
+sont disponibles dans [docs/page_decisions.md](docs/page_decisions.md). Le
+notebook [notebooks/uc3_jalon1.ipynb](notebooks/uc3_jalon1.ipynb) constitue le
+support principal de reproduction des expériences.
