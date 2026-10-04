@@ -9,10 +9,10 @@ L'objectif est d'analyser des fenêtres ECG de 10 secondes pour classifier autom
 | :--- | :--- |
 | **Classe** | M2 SDIA - Advanced Artificial Intelligence |
 | **Unité / projet** | UC3 - Cardiac Telemonitoring (CardioPatch) |
-| **Professeur** | Soufiane HAMIDA |
+| **Professeur** | SOUFIANE HAMIDA |
 | **Membre 1** | HICHAM OUAOUCHE |
-| **Membre 2** | loubnamahrach |
-| **Membre 3** | boulfalahkhadija |
+| **Membre 2** | LOUBNA MAHRACH |
+| **Membre 3** | KHADIJA BOULFALAH |
 
 ## Résumé exécutif
 
@@ -52,8 +52,8 @@ Le travail du Jalon 1 est réparti entre les 3 membres de l'équipe :
 | Membre | Responsabilités & Questions | Statut |
 | :--- | :--- | :---: |
 | **HICHAM OUAOUCHE** | Environnement, chargement des données, contrôles anti-fuite, détection QRS, 11 descripteurs de base, modèle MLP de référence (Q1), analyse des échecs QRS, vérification théorique 1 (poids de classe). | **Terminé & Validé** |
-| **loubnamahrach** | Comparaison des fonctions de perte Q2 (CE simple, CE pondérée, Focal Loss $\gamma=2.0$), enrichissement à 24 descripteurs avancés (morphologie, Welch, Poincaré) et étude d'ablation Q3. | **Terminé & Validé** |
-| **boulfalahkhadija** | Calibration du seuil d'alerte clinique FA Q4 (spécificité 95 %, courbe ROC / AUC), vérification théorique 2 (gradient de l'entropie croisée par rapport aux logits), tenue du journal d'expériences, évaluation finale sur le Test et rédaction de la note de décision clinique. | **Terminé & Validé** |
+| **LOUBNA MAHRACH** | Comparaison des fonctions de perte Q2 (CE simple, CE pondérée, Focal Loss $\gamma=2.0$), enrichissement à 24 descripteurs avancés (morphologie, Welch, Poincaré) et étude d'ablation Q3. | **Terminé & Validé** |
+| **KHADIJA BOULFALAH** | Calibration du seuil d'alerte clinique FA Q4 (spécificité 95 %, courbe ROC / AUC), vérification théorique 2 (gradient de l'entropie croisée par rapport aux logits), tenue du journal d'expériences, évaluation finale sur le Test et rédaction de la note de décision clinique. | **Terminé & Validé** |
 
 ---
 
