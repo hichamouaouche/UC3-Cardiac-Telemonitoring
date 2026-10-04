@@ -1,0 +1,3 @@
+2026-10-04T00:25:33.484371+00:00,1,Q1 MLP reference,11 descripteurs; Adam 1e-3; 60 epoques; batch=64; class_weight,entrainement termine,Analyser validation
+2026-10-04T00:25:52.378989+00:00,1,Q1 MLP reference - validation,11 descripteurs; CE ponderee; 60 epoques; batch=64,"acc=0.720; F1 macro=0.680; rappels=[0.627, 1.0, 0.721, 0.778, 0.88]",Q1 : metriques du modele de reference
+2026-10-04T00:27:38.255911+00:00,1,Q1 echecs QRS,seuils n_qrs < 8 ou > 25 ou ecart fc > 30%,9 fenetres en echec,Analyser signaux et impact MLP
